@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var message = require('../models/messages');
+var message = require('../models/Messages');
 var user = require('../models/User');
 var config = require('../config/config');
 
