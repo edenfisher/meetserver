@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var message = require('../models/message');
-
+var message = require('../models/messages');
+var user = require('../models/User');
 var config = require('../config/config');
 
 /**
@@ -10,13 +9,17 @@ var config = require('../config/config');
  * limits to K results
  */
 router.get('/', function (req, res, next) {
-    message.find(function (err, messages) {
-        if (err) {
-            //forward to error handling
-            next(err);
-        }
-        res.send(messages);
-    });
+user.sync({force: true}).then(function () {
+  // Table created
+  return user.create({
+    id:1,
+    username: "kushkushoni",
+    name: "bulbuloni",
+    password: "loveu"
+  }).then(function() {
+    res.send('finished');
+  });
+});
 });
 
 /**
