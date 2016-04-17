@@ -31,7 +31,11 @@ user.sync({force: false}).then(function () {
         password: req.body.password
       }
     }).then(function(user) {
-    res.send(user.id.toString());
+      if (user) {
+          res.send(user.id.toString());
+      } else {
+        throw new Error("username not found");
+      }
   }).error(function(error) {
     next(error);
   });
